@@ -1,0 +1,5 @@
+{
+  "name": "PDF Fusion",
+  "description": "A powerful, browser-based PDF merger that allows you to combine multiple PDF documents into one, with easy reordering and no file limits.",
+  "requestFramePermissions": []
+}
