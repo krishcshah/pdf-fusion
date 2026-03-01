@@ -4,6 +4,17 @@ import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { File, Folder, ChevronRight, ChevronDown, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
+// Use Vite's import.meta.glob to load source files at build time
+const sourceFiles = import.meta.glob([
+  '/src/**/*.{ts,tsx,css,html}',
+  '/index.html',
+  '/package.json',
+  '/vite.config.ts',
+  '/tsconfig.json',
+  '/tsconfig.app.json',
+  '/tsconfig.node.json'
+], { query: '?raw', import: 'default' });
+
 interface FileNode {
   name: string;
   path: string;
@@ -18,27 +29,37 @@ export default function SourceViewer() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch("/api/files")
-      .then((res) => res.json())
-      .then((data) => {
-        setFiles(data);
-        if (data.length > 0) {
-          // Select App.tsx by default if it exists
-          const defaultFile = data.find((f: string) => f.endsWith("App.tsx")) || data[0];
-          setSelectedFile(defaultFile);
-        }
-      });
+    // Extract file paths and remove leading slash
+    const filePaths = Object.keys(sourceFiles).map(p => p.replace(/^\//, ''));
+    setFiles(filePaths);
+    
+    if (filePaths.length > 0) {
+      // Select App.tsx by default if it exists
+      const defaultFile = filePaths.find((f: string) => f.endsWith("App.tsx")) || filePaths[0];
+      setSelectedFile(defaultFile);
+    }
   }, []);
 
   useEffect(() => {
     if (selectedFile) {
       setLoading(true);
-      fetch(`/api/file-content?path=${encodeURIComponent(selectedFile)}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setFileContent(data.content);
+      const loadContent = async () => {
+        try {
+          const loader = sourceFiles['/' + selectedFile];
+          if (loader) {
+            const content = await loader();
+            setFileContent(content as string);
+          } else {
+            setFileContent('File not found');
+          }
+        } catch (e) {
+          setFileContent('Error loading file content');
+        } finally {
           setLoading(false);
-        });
+        }
+      };
+      
+      loadContent();
     }
   }, [selectedFile]);
 

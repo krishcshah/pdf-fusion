@@ -15,7 +15,10 @@ import {
   CheckCircle2,
   AlertCircle,
   Code2,
-  Heart
+  Heart,
+  Shield,
+  Zap,
+  Layout
 } from 'lucide-react';
 import { motion, Reorder, AnimatePresence } from 'motion/react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
@@ -287,6 +290,46 @@ function PDFMerger() {
               Success! Your PDF is ready.
             </motion.div>
           )}
+        </div>
+
+        {/* Key Features Section */}
+        <div className="mt-32 mb-12">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl font-semibold text-zinc-900">Key Features</h2>
+            <p className="text-zinc-500 mt-2">Everything you need to manage your PDF documents</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white p-6 rounded-2xl border border-zinc-200 shadow-sm">
+              <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mb-4">
+                <Shield className="w-6 h-6" />
+              </div>
+              <h3 className="text-lg font-semibold text-zinc-900 mb-2">100% Private</h3>
+              <p className="text-zinc-500 text-sm leading-relaxed">
+                All processing happens directly in your browser. Your files are never uploaded to any server, ensuring complete privacy and security.
+              </p>
+            </div>
+            
+            <div className="bg-white p-6 rounded-2xl border border-zinc-200 shadow-sm">
+              <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-4">
+                <Zap className="w-6 h-6" />
+              </div>
+              <h3 className="text-lg font-semibold text-zinc-900 mb-2">Lightning Fast</h3>
+              <p className="text-zinc-500 text-sm leading-relaxed">
+                No waiting for uploads or downloads. Merge large documents instantly using the power of your device.
+              </p>
+            </div>
+            
+            <div className="bg-white p-6 rounded-2xl border border-zinc-200 shadow-sm">
+              <div className="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center mb-4">
+                <Layout className="w-6 h-6" />
+              </div>
+              <h3 className="text-lg font-semibold text-zinc-900 mb-2">Easy Reordering</h3>
+              <p className="text-zinc-500 text-sm leading-relaxed">
+                Simply drag and drop your files to arrange them in the exact order you want them to appear in the final document.
+              </p>
+            </div>
+          </div>
         </div>
       </main>
 
