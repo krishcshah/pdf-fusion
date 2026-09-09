@@ -1,81 +1,81 @@
-# PDF Fusion 📄⚡
+# PDF Fusion 📄⚡ - All-in-One PDF Toolkit
 
-Welcome to **PDF Fusion**, a fast, secure, and intuitive web application to merge multiple PDF files seamlessly.
+Welcome to **PDF Fusion v2.0**, a complete client-side PDF toolkit inspired by Smallpdf & iLovePDF. Merge, split, edit, sign, compress, convert and more — 100% private, no server uploads.
 
 ![Project Status](https://img.shields.io/badge/status-active-success.svg)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB)
 ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=flat&logo=vite&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=flat&logo=tailwind-css&logoColor=white)
 
-## ✨ Features
+## ✨ Features - 20+ Tools
 
-- **Client-Side Processing:** All PDF merging is performed entirely within your web browser using [`pdf-lib`](https://pdf-lib.js.org/). No files are ever uploaded or transmitted to an external server, guaranteeing maximum privacy and security for your sensitive documents.
-- **Drag-and-Drop Reordering:** An intuitive interface lets you easily reorder the sequence of your PDF files before merging them using Framer Motion animations.
-- **Source Viewer:** Transparency is key! PDF Fusion includes an integrated source code viewer (accessible right from the UI) that allows you to explore the application's underlying code in real-time.
-- **Fast and Modern:** Built with React, Vite, and styled neatly with Tailwind CSS for exceptional performance and a great user experience.
+### ORGANIZE
+- **Merge PDF** - Combine multiple PDFs with drag-to-reorder
+- **Split PDF** - Split by single pages, fixed ranges, or custom ranges (e.g. 1-3,5,8-10)
+- **Organize PDF** - Visual rearrangement with thumbnails, rotate, delete (pdf.js rendering)
+- **Rotate PDF** - Rotate individual or all pages 90°/180°/270°
+- **Delete Pages** - Visually select pages to remove
+- **Extract Pages** - Extract specific pages or ranges
+- **Reverse / Duplicate** - Reverse order or duplicate pages
 
-## 🛠️ How It Works
+### EDIT
+- **Edit PDF** - Add text annotations anywhere with position, size, color control
+- **Sign PDF** - Draw signature on canvas, place with X/Y/scale control on any page
+- **Watermark** - Text watermark with opacity, rotation, color, font-size
+- **Page Numbers** - Add {n}, {n}/{total}, Page {n} formats, 5 positions
+- **Crop PDF** - Crop margins via CropBox
 
-1. **Frontend**: The user interface relies on React to handle state (like file selection and reordering). 
-2. **Merging**: When you choose to merge your files, `pdf-lib` reads the uploaded files as ArrayBuffers, creates a new blank PDF Document, iterates over each imported PDF, copies over all pages, and adds them to the new unified document. The final file is presented as a blob URL for an instant download.
-3. **Backend Source Viewer**: An Express.js server runs alongside local development (and in production) strictly to expose read-only `/api/files` and `/api/file-content` routes. This purely powers the integrated "SourceViewer" component so you can easily browse the directory and read the project code while looking at the app.
+### CONVERT
+- **Images to PDF (JPG to PDF)** - Convert JPG/PNG/WEBP to PDF, A4 or fit, portrait/landscape, reorder
+- **PDF to Images (PDF to JPG)** - Render each page to JPG/PNG via pdf.js at 1x/2x/3x quality
+- **Compress PDF** - Structural optimization with low/medium/high levels, size comparison
 
----
+### SECURITY
+- **Protect PDF** - Password UI (demo: pdf-lib doesn't support encryption client-side, shows workflow)
+- **Unlock PDF** - Load encrypted PDFs with password and resave unlocked
 
-## 🚀 Run Your Own Version
+### EXTRA
+- **Repair PDF** - Try to repair by reloading & resaving
+- **PDF Info** - Metadata, page count, size
 
-Want to contribute, learn, or deploy your own instance of PDF Fusion? Follow these steps to get started locally:
+All tools work **100% client-side** using `pdf-lib` for manipulation and `pdfjs-dist` for rendering. No files leave your device.
 
-### Prerequisites
+## 🛠️ Tech Stack
 
-- [Node.js](https://nodejs.org/) (v18 or higher recommended)
-- `npm` (comes with Node.js) or `yarn` / `pnpm`
-- Git
+- React 19, Vite 6, TailwindCSS 4
+- pdf-lib 1.17 for PDF creation/editing
+- pdfjs-dist 4.4 for rendering thumbnails & PDF to images
+- Framer Motion for drag reorder
+- Lucide React icons
+- React Router for tool routing
 
-### Installation Steps
+## 🚀 Run Locally
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/krishcshah/pdf-fusion.git
-   ```
-
-2. **Navigate into the project directory:**
-   ```bash
-   cd pdf-fusion
-   ```
-
-3. **Install the dependencies:**
-   ```bash
-   npm install
-   ```
-
-4. **Environment Variables (Optional):**
-   Copy the `.env.example` file to create your own localized `.env.local` if you plan on adding AI integrations or modifications. (Default functionality works without this step).
-   ```bash
-   cp .env.example .env.local
-   ```
-
-5. **Start the development server:**
-   ```bash
-   npm run dev
-   ```
-
-6. **View the app:**
-   Open your browser and navigate to `http://localhost:3000` (or the port specified in your terminal output) to use PDF Fusion!
+```bash
+git clone https://github.com/krishcshah/pdf-fusion.git
+cd pdf-fusion
+npm install
+npm run dev
+# open http://localhost:3000
+```
 
 ## 📜 Scripts
 
-- `npm run dev`: Starts the local Express/Vite server for development.
-- `npm run build`: Compiles TypeScript and creates an optimized production build using Vite.
-- `npm run preview`: Bootstraps a local server to preview the production build.
-- `npm run lint`: Analyzes the code for errors (runs `tsc --noEmit`).
-- `npm run clean`: Cleans up the `dist` directory.
+- `npm run dev` - Vite dev server
+- `npm run build` - Production build
+- `npm run preview` - Preview build
+- `npm run lint` - tsc --noEmit
+- `npm run clean` - rm -rf dist
+
+## 🔒 Privacy
+
+Unlike Smallpdf/iLovePDF, PDF Fusion never uploads your files. Everything runs in browser memory via ArrayBuffers and Blob URLs.
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/krishcshah/pdf-fusion/issues).
+PRs welcome! Check issues page.
 
 ---
 <div align="center">
-  <i>Built with ❤️ using React, Express, and pdf-lib.</i>
+  <i>Built with ❤️ using React, pdf-lib, pdf.js. Inspired by Smallpdf & iLovePDF.</i>
 </div>
